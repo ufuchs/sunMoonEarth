@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+================================================================================
+TITLE		: build.xml
+DESCRIPTION	: ANT build file of project 
+AUTHOR		: z35@gmx.com
+COPYRIGHT	:
+================================================================================
+-->
+
+<project name="JPosas" default="test" basedir=".">
+
+
+	<!-- General properties used in the project -->
+	<property name="base.dir" value="${basedir}" />
+
+	<property name="src.dir" value="${base.dir}/src" />
+	<property name="bin.dir" value="${base.dir}/bin" />
+
+	<property name="minimum.javaversion" value="1.3" />
+
+	<!--
+	============================================================================ 
+	Initializes and ensures the build properties
+	============================================================================
+	 -->
+	<target name="init">
+	
+		<tstamp>
+			<format property="save.time" pattern="yyyyMMddhhmmss"/>
+		</tstamp>
+		
+		<mkdir dir="${bin.dir}"/>
+			
+	</target>
+
+	<!--
+	============================================================================ 
+	Cleans the output directories
+	============================================================================
+	 -->
+	 <target name="clean" depends="init" >
+
+		<delete includeemptydirs="true">
+			<fileset dir="${bin.dir}" includes="**/*"/>
+		</delete>
+		
+	</target>
+
+	<!--
+	============================================================================ 
+	Compile the library
+	============================================================================
+	 -->
+	<target name="compile" depends="clean" >
+
+		<javac 
+			srcdir="${src.dir}"
+			fork="true"
+			destdir="${bin.dir}"
+			deprecation="on" 
+			debug="on"
+			
+			encoding="utf-8"
+			source="${minimum.javaversion}"
+			target="${minimum.javaversion}"
+			
+		/>
+
+		
+	</target>
+
+	<!--
+	============================================================================ 
+	Tests the library
+	============================================================================
+	 -->
+	<target name="test" depends="compile" >
+
+	</target>
+
+</project>
+
+
